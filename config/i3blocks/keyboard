@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Check if svkbd is running and toggle
+#
+
+if pgrep -x "svkbd-en" > /dev/null
+then
+    while pgrep -x "svkbd-en" > /dev/null
+    do
+      killall svkbd-en
+      sleep 0.1
+    done
+else
+     # start virtual keyboard
+     i3-msg -t command "exec --no-startup-id svkbd-en -d" > /dev/null
+
+      while ! pgrep -x "svkbd-en" > /dev/null
+      do
+        sleep 0.1
+      done
+     sleep 0.1
+     
+     # Input method sometimes ignores virtual keyboard from some reason until restart or refocused to another window ...
+     # Restart works well, but just changing workspace looks as a less invasive and more smooth workaround
+     # i3-msg -t command "restart" > /dev/null
+     i3-msg -t command "workspace number 2" > /dev/null
+#     sleep 0.1
+     i3-msg -t command "workspace number 1" > /dev/null
+fi
+
+exit 0

@@ -1,0 +1,29 @@
+[keyboard]
+full_text=⌨ Keyboard
+command=while read button; do bash ~/.config/i3blocks/keyboard; done 
+color=#14ba3b
+interval=persist
+
+[separator]
+
+# Update time every 5 seconds
+[time]
+command=date +%T
+interval=5
+
+[separator]
+
+[power]
+full_text= Power Off
+command=while read button; do loginctl poweroff; done
+color=#F79494
+interval=persist
+
+[separator]
+
+[logout]
+full_text= Logout
+command=while read button; do i3-msg exit; done
+color=#FCBA03
+interval=persist
+
